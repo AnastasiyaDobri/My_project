@@ -1,6 +1,13 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from .models import Parsing
+
 
 # Create your views here.
+
+
+
 def test(request):
-    return HttpResponse("<h1>Hello world</h1>")
+   context=0
+   return render(request, template_name="testapp/test.html", context=context)
+

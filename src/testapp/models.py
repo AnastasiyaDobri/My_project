@@ -31,7 +31,7 @@ def creating():
     tf.seek(0)   
     lin=tf.readlines()
     z=len(lin)
-    for k in range(0,z): 
+    for k in range(0,100): 
        a=lin[k]
        l1=a.find('[')+1
        l2=a.find(':')
@@ -56,7 +56,7 @@ def creating():
     return total
 
 total=creating()
-for k in range (0,100000):
+for k in range (0,100): #ограничение на 100, очень долго отрабатывает
     a=str(total[k]['u_ip'])
     b=str(total[k]['u_date'])
     c=str(total[k]['u_browser'])

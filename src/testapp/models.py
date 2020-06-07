@@ -1,67 +1,49 @@
 from django.db import models
-import datetime
 
-class Parsing(models.Model):
-    ip=models.TextField(
-        verbose_name="ip",
+# Create your models here.
+
+class Genre(models.Model):
+    name=models.CharField(
+        verbose_name="Название жанра",
+        max_length=100
+    )
+    description=models.TextField(
+        verbose_name="Описание жанра",
         null=True,
         blank=True
     )
-    date=models.TextField(
-        verbose_name="time",
+    def __str__(self):
+        return self.name
+
+
+class Books(models.Model):
+    name=models.CharField(
+        verbose_name="Название книги",
+        max_length=100
+    )
+    genre=models.ForeignKey(
+        Genre,
+        on_delete=models.PROTECT,
+        verbose_name="Жанр книги",
+        max_length=100   
+    )
+
+    description=models.TextField(
+        verbose_name="Описание книги",
         null=True,
         blank=True
     )
+    created=models.DateTimeField(
+        verbose_name="Создано",
+        auto_now=False,
+        auto_now_add=True
+    )
+    created=models.DateTimeField(
+        verbose_name="Изменено",
+        auto_now=True,
+        auto_now_add=False
+    )
 
-    browser=models.TextField(
-        verbose_name="browser",
-        null=True,
-        blank=True
-    ) 
 
     def __str__(self):
-        return self.ip
-
-
-def creating():
-    tf=open('apache_logs.txt','r')
-    k=0
-    users = dict(u_ip=0, u_date=0, u_browser=0)
-    total=dict()
-    tf.seek(0)   
-    lin=tf.readlines()
-    z=len(lin)
-    for k in range(0,100): 
-       a=lin[k]
-       l1=a.find('[')+1
-       l2=a.find(':')
-       tn=(a[l1:l2])
-       users['u_date']=datetime.datetime.strptime(tn,"%d/%B/%Y")
-       users['u_ip']=a[0:11]
-       a2=a[::-1]
-       n1='Mozilla'
-       n2='Safari'
-       n3='Firefox'
-       n4='Chrome'
-       if a2.find(n4[::-1])>0:
-          users['u_browser']=n4
-       if a2.find(n3[::-1])>0:
-          users['u_browser']=n3
-       if a2.find(n2[::-1])>0:
-          users['u_browser']=n2
-       if a2.find(n1[::-1])>0:
-          users['u_browser']=n1
-       total[k]=users
-       k=k+1
-    return total
-
-total=creating()
-for k in range (0,100): #ограничение на 100, очень долго отрабатывает
-    a=str(total[k]['u_ip'])
-    b=str(total[k]['u_date'])
-    c=str(total[k]['u_browser'])
-    parsing=Parsing(ip=a,date=b,browser=c)
-    parsing.save()
-
-
-
+        return self.name

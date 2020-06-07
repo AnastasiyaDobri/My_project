@@ -1,7 +1,6 @@
 from django.contrib import admin
-from .models import Parsing
-
+from .models import Genre, Books
 # Register your models here.
 
-
-admin.site.register(Parsing)
+admin.site.register(Genre)
+admin.site.register(Books)

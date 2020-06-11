@@ -8,10 +8,12 @@ from django.views.generic import TemplateView
 from django.views.generic.edit import CreateView
 from django.views.generic.edit import UpdateView
 from django.views.generic import ListView
+from django.views.generic.edit import DeleteView
 # Create your views here.
 
 class Test(TemplateView):
     template_name='testapp/test.html'
+
   
     
 class CreateGenre(CreateView):
@@ -28,7 +30,11 @@ class UpdateGenre(UpdateView):
 
 class ListGenre(ListView):
     model=Genre
-    context_object_name = 'genre_list'
+    context_object_name = 'obj'
     template_name='testapp/list-genre.html'
 
-
+class DeleteGenre(DeleteView):
+    model=Genre
+    form_class=CreateGenreForm
+    template_name='testapp/delete_genre.html'
+    success_url="/test/"

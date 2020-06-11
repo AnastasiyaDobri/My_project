@@ -6,21 +6,13 @@
         <title>Document</title>
     </head>
     <body>
-    <img src="https://memepedia.ru/wp-content/uploads/2017/07/1429794583_343353562.png" width=400 height=350>
+  <h2>Удалить жанр {{object.name}}</h2>
   <form action="" method="post">
     {%csrf_token %}
     {{context}}
-    <a href="/list-genre/"><button type="button" class="btn btn-sm btn-outline-secondary">ok</a>
+    <input type="submit" value="Are you sure?">
 
 
   </form>
 
     </body>
-
-
-
-
-
-
-
-</html>

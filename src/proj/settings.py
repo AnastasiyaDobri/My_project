@@ -25,7 +25,7 @@ SECRET_KEY = 'a_90odlgt0xtf0wei8som)3l6&p_4hp=)2se539_!h9$uyrn7q'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['AnastasiyaDobri.pythonanywhere.com']
+ALLOWED_HOSTS = ['AnastasiyaDobri.pythonanywhere.com', '127.0.0.1']
 
 
 # Application definition
@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'crispy_forms',
     'testapp'
 ]
 
@@ -55,7 +56,7 @@ ROOT_URLCONF = 'proj.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR,'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -125,3 +126,6 @@ STATIC_URL = '/static/'
 STATIC_ROOT = '/home/AnastasiyaDobri/mysite/static'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = '/home/AnastasiyaDobri/mysite/media'
+
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'

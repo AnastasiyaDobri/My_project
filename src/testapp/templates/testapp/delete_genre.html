@@ -1,18 +1,14 @@
-<!DOCTYPE html>
-<html lang="ru">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-wifth", initial-scale=1.0>
-        <title>Document</title>
-    </head>
-    <body>
-  <h2>Удалить жанр {{object.name}}</h2>
+{% extends "base.html"%}
+{% load static%}
+{%block title%} Удаление жанра {% endblock title%}
+
+
+{%block main%}
+  <h2>Удалить жанр "{{object.name}}"?</h2>
   <form action="" method="post">
     {%csrf_token %}
     {{context}}
-    <input type="submit" value="Are you sure?">
-
-
+    <br>
+    <input type="submit" class="btn btn-outline-danger" value="Подтвердить удаление">
   </form>
-
-    </body>
+ {%endblock main%}

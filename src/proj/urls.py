@@ -19,9 +19,9 @@ from testapp.views import Test, CreateGenre, UpdateGenre, ListGenre, DeleteGenre
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('create-genre/', CreateGenre.as_view()),
-    path('test/', Test.as_view()),
-    path('update-genre/<int:pk>', UpdateGenre.as_view()),
-    path('list-genre/', ListGenre.as_view()),
-    path('delete-genre/<int:pk>', DeleteGenre.as_view()),
+    path('create-genre/', CreateGenre.as_view(), name='create-genre'),
+    path('test/', Test.as_view(), name='test'),
+    path('update-genre/<int:pk>', UpdateGenre.as_view(), name='update-genre'),
+    path('list-genre/', ListGenre.as_view(), name='list-genre'),
+    path('delete-genre/<int:pk>', DeleteGenre.as_view(), name='delete-genre'),
 ]

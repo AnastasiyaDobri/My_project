@@ -14,8 +14,9 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from testapp.views import Test, CreateGenre, UpdateGenre, ListGenre, DeleteGenre
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -24,4 +25,5 @@ urlpatterns = [
     path('update-genre/<int:pk>', UpdateGenre.as_view(), name='update-genre'),
     path('list-genre/', ListGenre.as_view(), name='list-genre'),
     path('delete-genre/<int:pk>', DeleteGenre.as_view(), name='delete-genre'),
+    path('books/', include('books.urls', namespace="books"))
 ]

@@ -1,5 +1,6 @@
 from django import forms
 from .models import Genre
+#from .models import Books
 
 class CreateGenreForm(forms.ModelForm):
   class Meta:
@@ -8,3 +9,4 @@ class CreateGenreForm(forms.ModelForm):
           'name',
           'description'
       )
+

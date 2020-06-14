@@ -2,8 +2,9 @@ from django.shortcuts import render
 from django.template import Context
 from django.http import HttpResponse
 from .models import Genre
-from .models import Books
+#from .models import Books
 from .forms import CreateGenreForm
+#from .forms import CreateBookForm
 from django.views.generic import TemplateView
 from django.views.generic.edit import CreateView
 from django.views.generic.edit import UpdateView
@@ -43,3 +44,4 @@ class DeleteGenre(DeleteView):
     template_name='testapp/delete_genre.html'
     def get_success_url(self):
        return reverse_lazy('list-genre')
+

@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'crispy_forms',
-    'testapp',
+    'genre',
     'books',
  
 ]
@@ -127,7 +127,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = '/home/AnastasiyaDobri/mysite/static'
 MEDIA_URL = '/media/'
-MEDIA_ROOT = '/home/AnastasiyaDobri/mysite/media'
-
+#MEDIA_ROOT = '/home/AnastasiyaDobri/mysite/media'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'

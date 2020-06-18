@@ -8,6 +8,21 @@ class CreateBookForm(forms.ModelForm):
       model=Books
       fields=(
           'name',
+          'genre',
+          'author',
+          'price',
           'description',
-          'genre'
+          'image',
+          'series',
+          'pub_year',
+          'pages',
+          'rate',
+          'cover',
+          'forma',
+          'ISBN',
+          'publisher',
+          'wight',
+          'age',
+          'available'
+
       )

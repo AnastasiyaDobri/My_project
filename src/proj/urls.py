@@ -15,15 +15,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from testapp.views import Test, CreateGenre, UpdateGenre, ListGenre, DeleteGenre
+from genre.views import Test, CreateGenre, UpdateGenre, ListGenre, DeleteGenre
+from books.views import ListGenreBook
+from django.conf import settings
+from django.conf.urls.static import static
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('create-genre/', CreateGenre.as_view(), name='create-genre'),
-    path('test/', Test.as_view(), name='test'),
-    path('update-genre/<int:pk>', UpdateGenre.as_view(), name='update-genre'),
-    path('list-genre/', ListGenre.as_view(), name='list-genre'),
-    path('delete-genre/<int:pk>', DeleteGenre.as_view(), name='delete-genre'),
+    path('', ListGenreBook.as_view(), name='main'),
+    path('genre/', include('genre.urls', namespace="genre")),
     path('books/', include('books.urls', namespace="books"))
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

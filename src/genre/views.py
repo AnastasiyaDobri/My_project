@@ -33,10 +33,11 @@ class UpdateGenre(UpdateView):
     def get_success_url(self):
        return reverse_lazy('genre:list')
 
+
 class ListGenre(ListView):
     model=Genre
     context_object_name = 'obj'
-    template_name='genre/list-book.html'
+    template_name='genre/list-genre.html'
 
 class DeleteGenre(DeleteView):
     model=Genre

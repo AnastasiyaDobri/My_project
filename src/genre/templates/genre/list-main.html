@@ -1,32 +1,29 @@
 {% extends "base.html"%}
 {% load static%}
-{%block title%} Список жанров {% endblock title%}
+{%block title%} Стартовая страница {% endblock title%}
 
 {%block main%}
 <main role="main">
-  <section class="jumbotron text-center">
-    <div class="container">
-      <h1>Список жанров</h1>
-      <p class="lead text-muted"></p>
-      <p>
-        <a href="{% url 'genre:create' %}" class="btn btn-primary my-2">Добавить жанр</a>
-        <a href="{% url 'books:list' %}" class="btn btn-primary my-2">Все книги</a>
-      </p>
-    </div>
-  </section>
-  <div class="album py-5 bg-light">
+
+  <div class="col-md-5 p-lg-5 mx-auto my-5">
+    <h5 class="display-4 font-weight-normal">Книги</h5>
+    <h4 class="ldisplay-5">top-6 книг с высокими оценками</h4>
+  </div>
     <div class="container">
       <div class="row"> 
         {% for object in object_list %}
         <div class="col-md-4">
           <div class="card mb-4 shadow-sm">
-            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">{{object.name}}</text></svg>
+            <a href="{% url 'books:detail' object.pk %}"> <img src={{object.image.url}}  class="card-img-top" alt="ntrcn"> 
             <div class="card-body">
+              <h6 class="card-title">{{object.author}}</h6>
+              <h5 class="card-title">{{object.name}}</h5>
               <p class="card-text">{{object.description}}</p>
               <div class="d-flex justify-content-between align-items-center">
+                <h5><span class="badge badge-pill badge-primary">{{object.price}} BYN</span><h5>
                 <div class="btn-group">
-                  <a href="{% url 'genre:update' object.pk %}"><button type="button" class="btn btn-sm btn-outline-secondary">Edit</button></a>
-                  <a href="{% url 'genre:delete' object.pk %}"><button type="button" class="btn btn-sm btn-outline-secondary">Delete</button></a>
+                  <a href="{% url 'books:update' object.pk %}"><button type="button" class="btn btn-sm btn-outline-secondary">Edit</button></a>
+                  <a href="{% url 'books:delete' object.pk %}"><button type="button" class="btn btn-sm btn-outline-secondary">Delete</button></a>
 
                 </div>
               </div>
@@ -38,31 +35,26 @@
     </div> 
   </div>
 
+  <div class="col-md-5 p-lg-5 mx-auto my-5">
+    <h5 class="display-4 font-weight-normal">Книги по жанрам</h5>
+  </div>
 
-<div class="album py-5 bg-light">
-    <div class="container">
-      <div class="row"> 
-        {% for object in genre %}
-        <div class="col-md-4">
-          <div class="card mb-4 shadow-sm">
-            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">{{object.name}}</text></svg>
-            <div class="card-body">
-              <p class="card-text">{{object.description}}</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <a href="{% url 'genre:update' object.pk %}"><button type="button" class="btn btn-sm btn-outline-secondary">Edit</button></a>
-                  <a href="{% url 'genre:delete' object.pk %}"><button type="button" class="btn btn-sm btn-outline-secondary">Delete</button></a>
 
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        {% endfor %}  
+<div class="container">
+    <div class="row">
+      {% for object in genre %}
+      <div class="col-md-4">
+        <p><a href="{% url 'books:list_by_genre' object.pk %}"><button type="button" class="btn btn-outline-primary btn-block" >Книги жанра "{{object.name}}" </p>
       </div>
-    </div> 
+      {% endfor %}
+      <div class="col-md-4">
+ 
+
+    <hr>
+
   </div>
 
 </main>
 {% endblock main%}
+
   

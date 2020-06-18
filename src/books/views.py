@@ -34,6 +34,8 @@ class ListBook(ListView):
     model=Books
     context_object_name = 'obj'
     template_name='books/list-book.html'
+ 
+
 
 
 class DeleteBook(DeleteView):
@@ -47,10 +49,7 @@ class ListGenreBook(ListView):
     model=Books
     context_object_name = 'obj'
     template_name='genre/list-main.html'
-    #queryset=model.objects.filter(genre="7")
-    #def get_queryset(self):
-        #self.genre = get_object_or_404(Genre, pk=6)
-        #return Books.objects.filter(genre=self.genre)
+    queryset=model.objects.order_by('-rate')[:6]
     def get_context_data(self, **kwargs):
             context = super().get_context_data(**kwargs)
             context['genre'] = Genre.objects.all()
@@ -59,3 +58,10 @@ class ListGenreBook(ListView):
 class DetailBook(DetailView):
     model=Books
     template_name='books/detail-book.html'
+
+
+class ListBookbyGenre(ListView):
+    template_name='books/list-book.html'
+    def get_queryset(self):
+        self.genre = get_object_or_404(Genre, pk=self.kwargs.get('pk'))
+        return Books.objects.filter(genre=self.genre)

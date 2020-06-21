@@ -11,6 +11,7 @@ from django.views.generic.edit import UpdateView
 from django.views.generic import ListView
 from django.views.generic.edit import DeleteView
 from django.urls import reverse_lazy
+from django.contrib.auth.mixins import LoginRequiredMixin
 # Create your views here.
 
 class Test(TemplateView):
@@ -25,6 +26,7 @@ class CreateGenre(CreateView):
     def get_success_url(self):
        return reverse_lazy('genre:list')
 
+
 class UpdateGenre(UpdateView):
     model=Genre
     form_class=CreateGenreForm
@@ -34,10 +36,13 @@ class UpdateGenre(UpdateView):
        return reverse_lazy('genre:list')
 
 
-class ListGenre(ListView):
+class ListGenre(LoginRequiredMixin, ListView):
     model=Genre
     context_object_name = 'obj'
     template_name='genre/list-genre.html'
+    #def get_context_data(self, **kwargs):
+        #user=self.request.user
+        #print(user.has_perm('auth.create_genre'))
 
 class DeleteGenre(DeleteView):
     model=Genre

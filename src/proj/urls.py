@@ -19,11 +19,14 @@ from genre.views import Test, CreateGenre, UpdateGenre, ListGenre, DeleteGenre
 from books.views import ListGenreBook
 from django.conf import settings
 from django.conf.urls.static import static
+from django.contrib.auth import views as auth_views
+
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', ListGenreBook.as_view(), name='main'),
     path('genre/', include('genre.urls', namespace="genre")),
-    path('books/', include('books.urls', namespace="books"))
+    path('books/', include('books.urls', namespace="books")),
+    path('profiles/', include('profiles.urls', namespace="profiles")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

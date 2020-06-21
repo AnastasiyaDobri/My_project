@@ -4,6 +4,7 @@
 
 
 {%block main%}
+{%if perms.auth.delete_genre %}
   <h2>Удалить жанр "{{object.name}}"?</h2>
   <form action="" method="post">
     {%csrf_token %}
@@ -11,4 +12,9 @@
     <br>
     <input type="submit" class="btn btn-outline-danger" value="Подтвердить удаление">
   </form>
+    {%else%}
+  <br>
+  <h3>Для выполнения действия недостаточно полномочий</h3>
+{%endif%}
+
  {%endblock main%}

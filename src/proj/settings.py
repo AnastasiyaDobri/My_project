@@ -38,9 +38,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'crispy_forms',
+    'phonenumber_field',
     'genre',
     'books',
- 
+    'profiles', 
+
 ]
 
 MIDDLEWARE = [
@@ -131,3 +133,4 @@ MEDIA_ROOT = '/home/AnastasiyaDobri/mysite/My_project/src/media'
 #MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+LOGIN_URL='/profiles/login/'

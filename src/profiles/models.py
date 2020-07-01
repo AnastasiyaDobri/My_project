@@ -24,4 +24,4 @@ class Profiles(models.Model):
     )
     
     def __str__(self):
-        return self.user.name
+        return self.user.phone

@@ -13,17 +13,23 @@
             <li><a href="{% url 'books:list' %}" class="text-white">Список всех книг</a></li>
             <li><a href="{% url 'genre:list' %}" class="text-white">Список жанров</a></li>
             <li><a href="{% url 'authors:list' %}" class="text-white">Список авторов</a></li>
+           
           </ul>
         </div>
       </div>
     </div>
   </div>
   <div class="navbar navbar-dark bg-dark shadow-sm">
-
+          <a href="{% url 'cart:cart' %}" class="navbar-brand d-flex align-items-center">
+          <i class="fas fa-shopping-bag fa-2x" style="color:yellow" ></i>
+          </a>
       <div class="container d-flex justify-content-between">
+      
        <a href="{% url 'main' %}" class="navbar-brand d-flex align-items-center">
         <strong>Главная страница</strong>
       </a>
+   
+
        {%if user.is_superuser %}
         <a href="/admin/" class="navbar-brand d-flex align-items-center">
         <strong>admin site</strong>

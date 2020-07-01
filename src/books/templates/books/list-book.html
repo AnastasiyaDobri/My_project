@@ -4,6 +4,7 @@
 
 {%block main%}
 <main role="main">
+{%include "message.html"%}
   <section class="jumbotron text-center">
     <div class="container">
       <h1>Список книг</h1>
@@ -42,7 +43,7 @@
                   <a href="{% url 'books:delete' object.pk %}"><button type="button" class="btn btn-sm btn-outline-secondary">Delete</button></a>
                   
                  {%endif%}
-                 <a href="{% url 'cart:add' %}?book_pk={{object.pk}}"><button type="button" class="btn btn-sm btn-outline-primary">Add to cart</button></a>
+                 <a href="{% url 'cart:add' %}?book_pk={{object.pk}}"><i class="fas fa-shopping-cart" ></i></a>
                 </div>
               </div>
             </div>

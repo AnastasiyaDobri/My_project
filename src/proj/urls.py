@@ -40,5 +40,5 @@ urlpatterns = [
     #path('password_reset_done/', PasswordResetDone.as_view(), name='password_reset_done'),
     #path('password_reset_confirm/(?P<uidb64>[0-9A-Za-z]+)-(?P<token>.+)/$', PasswordResetConfirm.as_view(), name='password_reset_confirm'),
     #path('password_reset_complete/', PasswordResetComplete.as_view(), name='password_reset_complete'),
-    #url(r'^', include('django.contrib.auth.urls'))
+    url(r'^', include('django.contrib.auth.urls'))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

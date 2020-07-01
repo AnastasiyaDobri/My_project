@@ -22,6 +22,8 @@ class CreateBook(CreateView):
     template_name='books/create_book.html'
     def get_success_url(self):
        return reverse_lazy('books:list')
+    def get_success_message(self,*args, **kwargs):
+       return f"Книга {self.object.name} была создана"
 
 class UpdateBook(UpdateView):
     model=Books

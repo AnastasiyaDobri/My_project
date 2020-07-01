@@ -4,14 +4,16 @@
 {%block title%} Корзина {% endblock title%}
 
 {%block main%}
-<main role="main">
-
+<h3>Товары пользователя {{user}}</h3>
 {% for object in object_list %}
-<h5><li class="list-group-item">{{object.book}} <span class="badge badge-secondary">{{object.quantity}} шт.</span></li></h5>
-
+{% ifequal object.cart.user user %}
+<h5><li class="list-group-item">{{object.book}} <span class="badge badge-secondary">{{object.quantity}} шт.</span>
+<a href="{% url 'cart:delete' object.pk %}"><i class="fas fa-trash-alt" style="color:yellow"></i></a></li></h5>
+{% endifequal %}
 {%endfor%}
 
 <br>
 <a href="{% url 'main' %}"><button type="button" class="btn btn-warning">Оформить заказ</button></a>
+
 </main>
 {% endblock main%}

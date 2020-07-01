@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.template import Context
 from django.http import HttpResponse
+from django.contrib.messages.views import SuccessMessageMixin
 from .models import Genre
 #from .models import Books
 from .forms import CreateGenreForm
@@ -19,10 +20,12 @@ class Test(TemplateView):
 
   
     
-class CreateGenre(CreateView):
+class CreateGenre(SuccessMessageMixin, CreateView):
     model=Genre
     form_class=CreateGenreForm
     template_name='genre/create_genre.html'
+    def get_success_message(self,*args, **kwargs):
+        return f"Жанр {self.object.name} был создан"
     def get_success_url(self):
        return reverse_lazy('genre:list')
 
@@ -49,5 +52,5 @@ class DeleteGenre(DeleteView):
     form_class=CreateGenreForm
     template_name='genre/delete_genre.html'
     def get_success_url(self):
-       return reverse_lazy('list')
+       return reverse_lazy('genre:list')
 

@@ -3,7 +3,11 @@
 {%block title%} Список жанров {% endblock title%}
 
 {%block main%}
+
+
+
 <main role="main">
+{%include "message.html"%}
   <section class="jumbotron text-center">
     <div class="container">
       <h1>Список жанров</h1>
@@ -14,9 +18,8 @@
       </p>
     </div>
   </section>
-
   {%include "paginator.html"%}
-
+  
   <div class="album py-5 bg-light">
     <div class="container">
       <div class="row"> 

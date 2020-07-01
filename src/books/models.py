@@ -1,5 +1,8 @@
 from django.db import models
 from genre.models import Genre
+from authors.models import Authors
+from publisher.models import Publishers
+from series.models import Series
 from datetime import datetime, date, time
 import pytz
 
@@ -28,13 +31,10 @@ class Books(models.Model):
         null=True,
         blank=True
     )
-
-    
-    author=models.CharField(
+ 
+    author=models.ManyToManyField(
+        Authors,
         verbose_name="Автор",
-        null=True,
-        blank=True,
-        max_length=100
     )
 
     price=models.FloatField(
@@ -44,11 +44,18 @@ class Books(models.Model):
         help_text="BYN"
     )
 
-    series=models.CharField(
-        verbose_name="Серия",
-        null=True,
-        blank=True,
-        max_length=100
+    publisher=models.ForeignKey(
+      Publishers,
+      on_delete=models.PROTECT,
+      verbose_name="Издатель",
+      max_length=100   
+    )
+
+    series=models.ForeignKey(
+      Series,
+      on_delete=models.PROTECT,
+      verbose_name="Серия книги",
+      max_length=100   
     )
 
     pub_year=models.CharField(
@@ -81,12 +88,7 @@ class Books(models.Model):
         blank=True,
     )
 
-    publisher=models.CharField(
-        verbose_name="Издатель",
-        null=True,
-        blank=True,
-        max_length=100
-    )
+ 
     wight=models.FloatField(
         verbose_name="Вес",
         null=True,
@@ -106,7 +108,7 @@ class Books(models.Model):
         verbose_name="Оценка",
         null=True,
         blank=True,
-        help_text="✰"
+        help_text="✰",
     )
     add_date=models.DateField(
         verbose_name="Дата добавления",

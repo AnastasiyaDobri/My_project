@@ -15,11 +15,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.conf.urls import url
 from genre.views import Test, CreateGenre, UpdateGenre, ListGenre, DeleteGenre
 from books.views import ListGenreBook
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.auth import views as auth_views
+from profiles.views import LoginProfile, LogoutProfile, PasswordChange, PasswordReset, PasswordResetDone, PasswordResetConfirm, PasswordResetComplete
 
 
 
@@ -29,4 +31,14 @@ urlpatterns = [
     path('genre/', include('genre.urls', namespace="genre")),
     path('books/', include('books.urls', namespace="books")),
     path('profiles/', include('profiles.urls', namespace="profiles")),
+    path('authors/', include('authors.urls', namespace="authors")),
+    path('cart/', include('cart.urls', namespace="cart")),
+    path('login/', LoginProfile.as_view(), name='login'),
+    path('logout/', LogoutProfile.as_view(), name='logout'),
+    path('password_change/', PasswordChange.as_view(), name='password_change'),
+    #path('password_reset/', PasswordReset.as_view(), name='password_reset'),
+    #path('password_reset_done/', PasswordResetDone.as_view(), name='password_reset_done'),
+    #path('password_reset_confirm/(?P<uidb64>[0-9A-Za-z]+)-(?P<token>.+)/$', PasswordResetConfirm.as_view(), name='password_reset_confirm'),
+    #path('password_reset_complete/', PasswordResetComplete.as_view(), name='password_reset_complete'),
+    #url(r'^', include('django.contrib.auth.urls'))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

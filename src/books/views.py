@@ -4,6 +4,7 @@ from django.template import Context
 from django.http import HttpResponse
 from books.models import Books
 from genre.models import Genre
+from authors.models import Authors
 from .forms import CreateBookForm
 from django.views.generic import TemplateView
 from django.views.generic.edit import CreateView
@@ -34,10 +35,8 @@ class ListBook(ListView):
     model=Books
     context_object_name = 'obj'
     template_name='books/list-book.html'
- 
-
-
-
+    paginate_by = 12
+   
 class DeleteBook(DeleteView):
     model=Books
     form_class=CreateBookForm
@@ -54,6 +53,7 @@ class ListGenreBook(ListView):
             context = super().get_context_data(**kwargs)
             context['genre'] = Genre.objects.all()
             return context
+
         
 class DetailBook(DetailView):
     model=Books
@@ -65,3 +65,16 @@ class ListBookbyGenre(ListView):
     def get_queryset(self):
         self.genre = get_object_or_404(Genre, pk=self.kwargs.get('pk'))
         return Books.objects.filter(genre=self.genre)
+
+class ListBookbyAuthor(ListView):
+    template_name='books/list-book.html'
+    def get_queryset(self):
+        self.author = get_object_or_404(Authors, pk=self.kwargs.get('pk'))
+        return Books.objects.filter(author=self.author)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['author'] = Authors.objects.all()
+        return context
+
+

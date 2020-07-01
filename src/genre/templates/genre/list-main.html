@@ -11,14 +11,15 @@
   </div>
     <div class="container">
       <div class="row"> 
-        {% for object in object_list %}
+         {% for object in object_list %}
         <div class="col-md-4">
           <div class="card mb-4 shadow-sm">
-            <a href="{% url 'books:detail' object.pk %}"> <img src={{object.image.url}}  class="card-img-top" alt="ntrcn"> 
-            <div class="card-body">
-              <h6 class="card-title">{{object.author}}</h6>
-              <h5 class="card-title">{{object.name}}</h5>
-              <p class="card-text">{{object.description}}</p>
+          <a href="{% url 'books:detail' object.pk %}"> <img src={{object.image.url}}  class="card-img-top" alt="ntrcn"> 
+           <div class="card-body">
+                {% for author in object.author.all %}
+                 {%if author.biography %}<a href="{% url 'authors:detail' author.pk %}">{%endif%}{{author.name}}</a>
+                {% endfor %}
+              <a href="{% url 'books:detail' object.pk %}"><h5 class="card-title">{{object.name}}</h5></a>
               <div class="d-flex justify-content-between align-items-center">
                 <h5><span class="badge badge-pill badge-primary">{{object.price}} BYN</span><h5>
                 <div class="btn-group">

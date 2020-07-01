@@ -1,0 +1,19 @@
+{% extends "base.html"%}
+{% load static%}
+{% load crispy_forms_tags %}
+{%block title%} Корзина {% endblock title%}
+
+{%block main%}
+<main role="main">
+{{object.book.all}}
+{{cart_pk}}
+
+
+{% for book in object.book.all %}
+<li class="list-group-item">Книги в корзине: 1 </li>
+{%endfor%}
+
+
+<input type="submit" class="btn btn-outline-warning" value="Добавить">
+</main>
+{% endblock main%}

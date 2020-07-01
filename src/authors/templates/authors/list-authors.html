@@ -1,0 +1,36 @@
+{% extends "base.html"%}
+{% load static%}
+{%block title%} Список авторов {% endblock title%}
+
+{%block main%}
+<main role="main">
+  <section class="jumbotron text-center">
+    <div class="container">
+      <h1>Список авторов</h1>
+      <p class="lead text-muted"></p>
+      <p>
+       {%if user.is_superuser %}
+        <a href="{% url 'authors:create' %}" class="btn btn-primary my-2">Добавить автора</a>
+        {%endif%}
+        <a href="{% url 'authors:list' %}" class="btn btn-primary my-2">Перейти к авторам</a>
+      </p>
+    </div>
+  </section>
+  <div class="album py-5 bg-light">
+    <div class="container">
+      <div class="row"> 
+      {% for object in object_list %}
+      <div class="col-md-4">
+        <p><a href="{% url 'books:list_by_author' object.pk %}"><li class="list-group-item">{{object.name}} 
+        {%if object.biography %}<a href="{% url 'authors:detail' object.pk %}"> <button type="button" class="btn btn-sm btn-outline-secondary">oб авторе</button></a>{% endif %}
+       </p>
+       </div>
+        {% endfor %}  
+        <div class="btn-group">
+
+        </div>
+      </div>
+    </div> 
+  </div>
+</main>
+{% endblock main%}

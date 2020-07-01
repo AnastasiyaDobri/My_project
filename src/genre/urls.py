@@ -9,5 +9,6 @@ urlpatterns = [
     path('create/', CreateGenre.as_view(), name='create'),
     path('update/<int:pk>', UpdateGenre.as_view(), name='update'),
     path('list/', ListGenre.as_view(), name='list'),
-    path('delete/<int:pk>', DeleteGenre.as_view(), name='delete')
+    path('delete/<int:pk>', DeleteGenre.as_view(), name='delete'),
+
 ]

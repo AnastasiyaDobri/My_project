@@ -3,7 +3,6 @@
 {% load crispy_forms_tags %}
 {%block title%} Карточка книги{% endblock title%}
 
-
 {%block main%}
   <h2>{{object.name}}</h2>
   <br>
@@ -14,23 +13,27 @@
     </div>
     <div class="col-md-8">
     <div class="card-body">
+   
   <li class="list-group-item active">Название: {{object.name}}</li>
-  <li class="list-group-item ">Жанр: {{object.genre}}</li>
-  <li class="list-group-item ">Цена: {{object.price}}</li>
-  <li class="list-group-item ">Автор: {{object.author}}</li>
-  <li class="list-group-item">Описание: {{object.description}}</li>
-  <li class="list-group-item">Издатель: {{object.publisher}}</li>
-  <li class="list-group-item">Возрастные ограничения: {{object.age}}</li>
+  <li class="list-group-item ">Жанр: <a href="{% url 'books:list_by_genre' object.genre.pk %}">{{object.genre}}</a></li>
+  <li class="list-group-item ">Цена: {{object.price}} BYN</li>
+  <li class="list-group-item ">Автор: 
+  {% for author in object.author.all %}
+  {%if author.biography %}<a href="{% url 'authors:detail' author.pk %}">{%endif%}{{author.name}}</a>{% endfor %}
+  </li>
+   {%if object.description %}<li class="list-group-item">Описание: {{object.description}}</li>{%endif%}
+   {%if object.publisher %}<li class="list-group-item">Издатель: <img src={{object.publisher.logo.url}}></li>{%endif%}
+   {%if object.age %}<li class="list-group-item">Возрастные ограничения: {{object.age}}+</li>{%endif%}
   <li class="list-group-item">Доступен к заказу: {{object.available}}</li>
-  <li class="list-group-item">Серия: {{object.series}}</li>
-  <li class="list-group-item">Год выпуска: {{object.pub_year}}</li>
-  <li class="list-group-item">Количество страниц: {{object.pages}}</li>
-  <li class="list-group-item">Обложка: {{object.cover}}</li>
-  <li class="list-group-item">Формат: {{object.forma}}</li>
-  <li class="list-group-item">Оценка: {{object.rate}}</li>
-  <li class="list-group-item">Вес книги: {{object.wight}}</li>
-  <li class="list-group-item">Добавлено: {{object.add_date}}</li>
-  <li class="list-group-item">Изменено: {{object.update_date}}</li>
+   {%ifequal object.series '-' %}<li class="list-group-item">Серия: {{object.series}}</li>{%endifequal%}
+   {%if object.pub_year %}<li class="list-group-item">Год выпуска: {{object.pub_year}}</li>{%endif%}
+   {%if object.pages %}<li class="list-group-item">Количество страниц: {{object.pages}} шт.</li>{%endif%}
+   {%if object.cover %}<li class="list-group-item">Обложка: {{object.cover}}</li>{%endif%}
+   {%if object.forma %}<li class="list-group-item">Формат: {{object.forma}}</li>{%endif%}
+   {%if object.rate %}<li class="list-group-item">Оценка: {{object.rate}}✰</li>{%endif%}
+   {%if object.wight %}<li class="list-group-item">Вес книги: {{object.wight}} грамм</li>{%endif%}
+   <li class="list-group-item">Добавлено: {{object.add_date}}</li>
+   <li class="list-group-item">Изменено: {{object.update_date}}</li>
 
       </div>
     </div>

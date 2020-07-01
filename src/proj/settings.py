@@ -41,7 +41,12 @@ INSTALLED_APPS = [
     'phonenumber_field',
     'genre',
     'books',
-    'profiles', 
+    'profiles',
+    'authors', 
+    'publisher',
+    'series',
+    'cart',
+
 
 ]
 
@@ -129,8 +134,15 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = '/home/AnastasiyaDobri/mysite/static'
 MEDIA_URL = '/media/'
-MEDIA_ROOT = '/home/AnastasiyaDobri/mysite/My_project/src/media'
-#MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+#MEDIA_ROOT = '/home/AnastasiyaDobri/mysite/My_project/src/media'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
-LOGIN_URL='/profiles/login/'
+LOGIN_URL='/login/'
+
+#EMAIL_HOST = 'smtp.sendgrid.net'
+#EMAIL_PORT = 587
+#EMAIL_HOST_USER = 'testsite_app'
+#EMAIL_HOST_PASSWORD = 'mys3cr3tp4ssw0rd'
+#EMAIL_USE_TLS = True
+#DEFAULT_FROM_EMAIL = '<a.dobriyan@icloud.com>'

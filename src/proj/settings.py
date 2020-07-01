@@ -134,8 +134,8 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = '/home/AnastasiyaDobri/mysite/static'
 MEDIA_URL = '/media/'
-#MEDIA_ROOT = '/home/AnastasiyaDobri/mysite/My_project/src/media'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = '/home/AnastasiyaDobri/mysite/My_project/src/media'
+#MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 LOGIN_URL='/login/'

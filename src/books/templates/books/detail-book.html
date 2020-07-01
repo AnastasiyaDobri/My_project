@@ -10,7 +10,10 @@
   <div class="row no-gutters">
     <div class="col-md-4">
       <img src={{object.image.url}} class="card-img" alt="...">
+      <br>
+      <a href="{% url 'cart:add' %}?book_pk={{object.pk}}"><button type="button" class="btn btn-warning">Add to cart</button></a>
     </div>
+   
     <div class="col-md-8">
     <div class="card-body">
    
@@ -36,6 +39,7 @@
    <li class="list-group-item">Изменено: {{object.update_date}}</li>
 
       </div>
+      
     </div>
   </div>
 </div>

@@ -5,15 +5,13 @@
 
 {%block main%}
 <main role="main">
-{{object.book.all}}
-{{cart_pk}}
 
+{% for object in object_list %}
+<h5><li class="list-group-item">{{object.book}} <span class="badge badge-secondary">{{object.quantity}} шт.</span></li></h5>
 
-{% for book in object.book.all %}
-<li class="list-group-item">Книги в корзине: 1 </li>
 {%endfor%}
 
-
-<input type="submit" class="btn btn-outline-warning" value="Добавить">
+<br>
+<a href="{% url 'main' %}"><button type="button" class="btn btn-warning">Оформить заказ</button></a>
 </main>
 {% endblock main%}

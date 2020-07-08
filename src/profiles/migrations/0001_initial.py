@@ -19,7 +19,6 @@ class Migration(migrations.Migration):
             name='Profiles',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('phone', phonenumber_field.modelfields.PhoneNumberField(blank=True, max_length=128, null=True, region=None, verbose_name='Номер телефона')),
                 ('adress', models.CharField(blank=True, max_length=150, null=True, verbose_name='Адрес')),
                 ('user', models.OneToOneField(blank=True, null=True, on_delete=django.db.models.deletion.PROTECT, to=settings.AUTH_USER_MODEL)),
             ],

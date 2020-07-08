@@ -10,8 +10,10 @@ from .forms import AddBookToCartForm
 from django.urls import reverse_lazy
 from django.views.generic.edit import DeleteView
 from django.contrib.messages.views import SuccessMessageMixin
+from django.contrib.auth.mixins import LoginRequiredMixin
 
-class AddBookToCart(SuccessMessageMixin, UpdateView):
+
+class AddBookToCart(SuccessMessageMixin,LoginRequiredMixin, UpdateView):
     model=models.BooksInCart
     template_name='cart/add.html'
     form_class=AddBookToCartForm
@@ -24,6 +26,8 @@ class AddBookToCart(SuccessMessageMixin, UpdateView):
         cart_pk=self.request.session.get('cart_pk')
         book=Books.objects.get(pk=book_pk)
         user=self.request.user
+
+    
         cart, create=models.Cart.objects.get_or_create(
             pk=cart_pk,
             user=user,

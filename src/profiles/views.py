@@ -20,7 +20,7 @@ from django.contrib.auth.views import PasswordResetConfirmView
 from django.contrib.auth.views import PasswordResetCompleteView
 
 
-class CreateUserProfile(SuccessMessageMixin, FormView):
+class CreateUserProfile(FormView):
     template_name = 'profiles/create_user.html'
     form_class = UserDataForm
 

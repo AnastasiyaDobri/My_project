@@ -5,9 +5,13 @@ from django.http import HttpResponseRedirect
 from django.views.generic.edit import CreateView
 from django.template import Context
 from profiles.models import Profiles
+from books.models import Books
+from cart.models import BooksInCart
 from profiles.models import User
 from .forms import CreateProfileForm
 from .forms import UserDataForm
+from django.contrib.auth.models import Group, Permission
+from django.contrib.contenttypes.models import ContentType 
 from django.views.generic.edit import FormView
 from django.urls import reverse_lazy
 from django.contrib.auth.views import LoginView
@@ -18,6 +22,21 @@ from django.contrib.auth.views import PasswordResetView
 from django.contrib.auth.views import PasswordResetDoneView
 from django.contrib.auth.views import PasswordResetConfirmView
 from django.contrib.auth.views import PasswordResetCompleteView
+
+class MyGroups(Group):
+    admin, created = Group.objects.get_or_create(name='Admin')
+    customer, created = Group.objects.get_or_create(name='Customers')
+    manager, created = Group.objects.get_or_create(name='Manager')
+    content_type_books= ContentType.objects.get_for_model(Books)
+    content_type_cart= ContentType.objects.get_for_model(BooksInCart) 
+    customer.permissions.add(Permission.objects.get(codename='can_view_books',name='Can view books',content_type=content_type_books))
+    customer.permissions.add(Permission.objects.get(codename='can_add_books_in_cart',name='Can add books in cart',content_type=content_type_cart))
+    customer.permissions.add(Permission.objects.get(codename='can_change_books_in_cart',name='Can change books in cart',content_type=content_type_cart))
+    customer.permissions.add(Permission.objects.get(codename='can_delete_books_in_cart',name='Can delete books in cart',content_type=content_type_cart))
+    customer.permissions.add(Permission.objects.get(codename='can_view_books_in_cart',name='Can view books in cart',content_type=content_type_cart))
+
+
+  
 
 
 class CreateUserProfile(FormView):
@@ -45,8 +64,9 @@ class CreateUserProfile(FormView):
             password=form_password,
             last_name=form_last_name,
             first_name=form_first_name,
-            email=form_email
+            email=form_email,          
         )
+        user.groups.add(Group.objects.get(name='Customers'))
         form_last_name=form.cleaned_data['last_name']
         profile, create=models.Profiles.objects.get_or_create(
             user=User.objects.get(username=form_username),

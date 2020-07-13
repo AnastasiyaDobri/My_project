@@ -1,0 +1,16 @@
+{% extends "base.html"%}
+{% load static%}
+{% load crispy_forms_tags %}
+{%block title%} Товары пользователя {{user}}{% endblock title%}
+
+{%block main%}
+<h3>Товары пользователя {{user}}</h3>
+{% for books in object.books.all %}
+
+
+<h5><li class="list-group-item ">{{books.book.name}} <span class="badge badge-secondary">{{books.quantity}} шт. </span><a href="{% url 'cart:delete' books.pk %}"><i class="fas fa-trash-alt" style="color:yellow"></i></a></li></h5></li>
+
+{%endfor%}
+<br>
+<a href="{% url 'main' %}"><button type="button" class="btn btn-warning">Оформить заказ</button></a>
+ {%endblock main%}

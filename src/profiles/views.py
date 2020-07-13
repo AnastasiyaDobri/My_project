@@ -36,9 +36,6 @@ class MyGroups(Group):
     customer.permissions.add(Permission.objects.get(codename='can_view_books_in_cart',name='Can view books in cart',content_type=content_type_cart))
 
 
-  
-
-
 class CreateUserProfile(FormView):
     template_name = 'profiles/create_user.html'
     form_class = UserDataForm
@@ -74,8 +71,6 @@ class CreateUserProfile(FormView):
             first_name=form_first_name,
             adress= form_adress,
             phone=form_phone
-
-
         )     
         return HttpResponseRedirect('http://127.0.0.1:8000/')
 

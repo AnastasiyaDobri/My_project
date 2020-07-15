@@ -58,12 +58,17 @@ class CreateUserProfile(FormView):
 
         user, create=models.User.objects.get_or_create(
             username=form_username,
-            password=form_password,
+            #password=form_password,
             last_name=form_last_name,
             first_name=form_first_name,
             email=form_email,          
         )
         user.groups.add(Group.objects.get(name='Customers'))
+        if create:
+          # user was created
+          # set the password here
+          user.set_password(str(form_password))
+          user.save()
         form_last_name=form.cleaned_data['last_name']
         profile, create=models.Profiles.objects.get_or_create(
             user=User.objects.get(username=form_username),
@@ -71,8 +76,12 @@ class CreateUserProfile(FormView):
             first_name=form_first_name,
             adress= form_adress,
             phone=form_phone
-        )     
-        return HttpResponseRedirect('http://127.0.0.1:8000/')
+        )    
+        def get_success_url(self):
+            return reverse_lazy('main') 
+
+        return HttpResponseRedirect(get_success_url(self))
+        
 
 
 

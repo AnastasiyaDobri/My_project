@@ -42,12 +42,7 @@ class AddBookToCart(SuccessMessageMixin, UpdateView):
         book_pk=self.request.GET.get('book_pk')
         book=Books.objects.get(pk=book_pk)
         cart=get_cart(self.request)
-        #user=self.request.user
-        #if self.request.user.is_anonymous:
-            #user, create=models.User.objects.get_or_create(
-            #username="Гость",
-            #password="password"      
-            #)
+
         obj, create=self.model.objects.get_or_create(
             cart=cart,
             book=book,
@@ -61,7 +56,9 @@ class AddBookToCart(SuccessMessageMixin, UpdateView):
 
 
 class CartTotal(RedirectView):
+
     def get_redirect_url(self):
+        cart=get_cart(self.request)
         cart_pk=self.request.session.get('cart_pk')
         return reverse_lazy('cart:detail', kwargs={'pk': self.request.session.get('cart_pk')})
 

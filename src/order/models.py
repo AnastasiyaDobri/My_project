@@ -7,18 +7,18 @@ class Order(models.Model):
     )
     status=models.CharField(
         choices=[
-        ('0','Отменен'),
         ('1','Новый'),
         ('2','Подтвержден'),
         ('3','В обработке'),
         ('4','Доставляется'),
-        ('5','Доставлен'),],
-        #choices=STATUS_CHOICES,
+        ('5','Доставлен'),
+        ('6','Отменен'),],
         max_length=1,
         default=('1','Новый'),
-        blank=True,
+        blank=False,
     )
-    delivery_adress=models.TextField("Адрес доставки", max_length=120)
-    contact_phone=models.TextField("Номер телефона", max_length=40)
+
+    delivery_adress=models.CharField("Адрес доставки", max_length=120)
+    contact_phone=models.CharField("Номер телефона", max_length=40)
     created=models.DateTimeField(("Created"), auto_now=False, auto_now_add=True)
     updated=models.DateTimeField(("Updated"), auto_now=True, auto_now_add=False)

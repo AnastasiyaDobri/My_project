@@ -33,6 +33,7 @@ urlpatterns = [
     path('profiles/', include('profiles.urls', namespace="profiles")),
     path('authors/', include('authors.urls', namespace="authors")),
     path('cart/', include('cart.urls', namespace="cart")),
+    path('order/', include('order.urls', namespace="order")),
     path('login/', LoginProfile.as_view(), name='login'),
     path('logout/', LogoutProfile.as_view(), name='logout'),
     path('password_change/', PasswordChange.as_view(), name='password_change'),

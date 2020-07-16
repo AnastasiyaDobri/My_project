@@ -10,9 +10,18 @@ class Cart(models.Model):
         related_name='carts',
         null=True
     )
-
+ 
     def __str__(self):
      return f'Cart #{self.pk}'
+
+    @property
+    def price(self):
+        price=0
+        for product in self.books.all():
+            price+=product.price
+        return price
+
+
 
 class BooksInCart(models.Model):
     cart=models.ForeignKey(
@@ -27,8 +36,14 @@ class BooksInCart(models.Model):
     )
     quantity=models.IntegerField(
         verbose_name="Количество",
-        default=1
+        default=1,
+
     )
+    @property
+    def price(self):
+        price=self.quantity*self.book.price
+        return price
+
     def __str__(self):
      return f'Book #{self.book.name}'
 

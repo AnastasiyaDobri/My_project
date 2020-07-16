@@ -4,7 +4,7 @@
 
 
 {%block main%}
-  <h2>Удалить этот товар из корзины?</h2>
+  <h2>Удалить книгу "{{object.book.name}}" из корзины?</h2>
   <form action="" method="post">
     {%csrf_token %}
     {{context}}

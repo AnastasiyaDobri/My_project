@@ -8,9 +8,15 @@
 {% for books in object.books.all %}
 
 
-<h5><li class="list-group-item ">{{books.book.name}} <span class="badge badge-secondary">{{books.quantity}} шт. </span><a href="{% url 'cart:delete' books.pk %}"><i class="fas fa-trash-alt" style="color:yellow"></i></a></li></h5></li>
+<h5><li class="list-group-item ">{{books.book.name}} <span class="badge badge-secondary">{{books.quantity}} шт. {{books.price}} BYN.</span>
+<a href="{% url 'cart:delete' books.pk %}"><i class="fas fa-trash-alt" style="color:yellow"></i></a>
+<a href="{% url 'cart:add'  %}?book_pk={{books.book.pk}}"><i class="fas fa-edit" style="color:yellow"></i></a></li></h5></li>
 
 {%endfor%}
 <br>
+<h4>Стоимость заказа {{object.price}}</h4>
+<br>
 <a href="{% url 'main' %}"><button type="button" class="btn btn-warning">Оформить заказ</button></a>
+
+
  {%endblock main%}

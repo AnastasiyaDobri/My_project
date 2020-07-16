@@ -18,6 +18,8 @@ from django.views.generic.base import RedirectView
 def get_cart(request):
     cart_pk=request.session.get('cart_pk')
     user=request.user
+    if user.is_anonymous:
+        user=None
     cart, create=models.Cart.objects.get_or_create(
         pk=cart_pk,
         defaults={
@@ -38,7 +40,6 @@ class AddBookToCart(SuccessMessageMixin, UpdateView):
 
     def get_object(self):
         book_pk=self.request.GET.get('book_pk')
-        #cart_pk=self.request.session.get('cart_pk')
         book=Books.objects.get(pk=book_pk)
         cart=get_cart(self.request)
         #user=self.request.user
@@ -47,15 +48,6 @@ class AddBookToCart(SuccessMessageMixin, UpdateView):
             #username="Гость",
             #password="password"      
             #)
-    
-        #cart, create=models.Cart.objects.get_or_create(
-            #pk=cart_pk,
-            #defaults={
-                #"user":user,
-            #}
-        #)
-        #if create:
-            #self.request.session['cart_pk']=cart.pk
         obj, create=self.model.objects.get_or_create(
             cart=cart,
             book=book,
@@ -92,3 +84,4 @@ class DeleteCart(DeleteView):
 class DetailCart(DetailView):
     model=Cart
     template_name='cart/cart2.html'
+

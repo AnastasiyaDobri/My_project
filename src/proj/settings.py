@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'publisher',
     'series',
     'cart',
+    'order',
 
 
 ]

@@ -6,9 +6,12 @@
 <html lang="ru">
 
 {%block main%}
+{%if user.is_authenticated %}<h5><div class="alert alert-warning" role="alert"><a href="{% url 'password_change' %}" class="text-warning">Сменить пароль</a></div></h5> {%endif%}
   <form action="" method="post" enctype="multipart/form-data">
     {%csrf_token %}
     {{form|crispy}}
+    
+
     <input type="submit" class="btn btn-outline-warning" value="Подтвердить">
 
 

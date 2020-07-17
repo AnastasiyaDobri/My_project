@@ -25,7 +25,9 @@
   {% for author in object.author.all %}
   {%if author.biography %}<a href="{% url 'authors:detail' author.pk %}">{%endif%}{{author.name}}</a>{% endfor %}
   </li>
-   {%if object.description %}<li class="list-group-item">Описание: {{object.description}}</li>{%endif%}
+   {%if object.description %}
+   <li class="list-group-item" ><div data-spy="scroll" data-target="#navbar-example" data-offset="0" style="height:150px;overflow:auto; position: relative;">Описание: {{object.description}}</div></li>
+   {%endif%}
    {%if object.publisher %}<li class="list-group-item">Издатель: <img src={{object.publisher.logo.url}}></li>{%endif%}
    {%if object.age %}<li class="list-group-item">Возрастные ограничения: {{object.age}}+</li>{%endif%}
   <li class="list-group-item">Доступен к заказу: {{object.available}}</li>

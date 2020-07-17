@@ -9,9 +9,10 @@ class CreateProfileForm(forms.ModelForm):
   class Meta(UserCreationForm):
       model=Profiles
       fields=(
-          'user',
+          'first_name',
+          'last_name',
           'phone',
-          'adress'
+          'adress',
       )
 
 class UserDataForm(forms.Form):

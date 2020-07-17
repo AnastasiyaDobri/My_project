@@ -10,6 +10,7 @@
           <h4 class="text-white">Menu:</h4>
           <ul class="list-unstyled">
             {%if user.is_authenticated %}<li><a href="{% url 'password_change' %}" class="text-warning">Сменить пароль</a></li> {%endif%}
+            {%if user.is_authenticated %}<li><a href="{% url 'profiles:update' %}?profiles_pk={{user.profiles.pk}}" class="text-warning">Изменить данные пользователя</a></li> {%endif%}
             <li><a href="{% url 'books:list' %}" class="text-white">Список всех книг</a></li>
             <li><a href="{% url 'genre:list' %}" class="text-white">Список жанров</a></li>
             <li><a href="{% url 'authors:list' %}" class="text-white">Список авторов</a></li>
@@ -38,6 +39,7 @@
       {%if user.is_authenticated %}
        <a href="{% url 'logout' %}" class="navbar-brand d-flex align-items-center">
        <strong class="text-muted">выйти из профиля {{user}}</strong></a>
+       
       {% else %}
         <a href="{% url 'login' %}" class="navbar-brand d-flex align-items-center">
        <i class="far fa-user fa-2x" style="color:yellow" ></i></a>

@@ -10,6 +10,7 @@ from cart.models import BooksInCart
 from profiles.models import User
 from .forms import CreateProfileForm
 from .forms import UserDataForm
+from django.views.generic.edit import UpdateView
 from django.contrib.auth.models import Group, Permission
 from django.contrib.contenttypes.models import ContentType 
 from django.views.generic.edit import FormView
@@ -82,7 +83,18 @@ class CreateUserProfile(FormView):
 
         return HttpResponseRedirect(get_success_url(self))
         
+class UpdateProfile(UpdateView):
+    model=Profiles
+    form_class=CreateProfileForm
+    template_name='profiles/create_profiles.html'
+    def get_object(self):
+        user=self.request.user
+        user_pk=user.pk
+        profiles_pk=Profiles.objects.get(user=user_pk)
+        return profiles_pk
 
+    def get_success_url(self):
+       return reverse_lazy('main')
 
 
 

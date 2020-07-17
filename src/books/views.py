@@ -50,7 +50,13 @@ class ListGenreBook(ListView):
     model=Books
     context_object_name = 'obj'
     template_name='genre/list-main.html'
-    queryset=model.objects.order_by('-rate')[:6]
+    def get_queryset(self):
+        queryset={'top': Books.objects.order_by('-rate')[:6],
+        'new': Books.objects.order_by('-add_date')[:6]
+
+
+        }
+        return queryset
     def get_context_data(self, **kwargs):
             context = super().get_context_data(**kwargs)
             context['genre'] = Genre.objects.all()

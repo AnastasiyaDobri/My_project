@@ -5,6 +5,7 @@ from profiles.models import Profiles
 from profiles.models import User
 from django.views.generic.edit import UpdateView
 from .models import Order
+from cart.models import Cart
 from django.urls import reverse_lazy
 from cart.views import get_cart
 from cart.models import BooksInCart
@@ -29,12 +30,22 @@ class Order(SuccessMessageMixin, UpdateView):
         else:
             phone=''
             adress=''
-        print(user.pk)
-        cart=get_cart(self.request)
+
+        cart_id=self.request.session.get('cart_pk')
+        if cart_id:
+            cart=Cart.objects.get(pk=cart_id)
+            try:
+                order_pk=cart.order.pk
+            except:
+                order_pk=None
+
         obj, create=self.model.objects.get_or_create(
-            cart=cart,
-            contact_phone=phone,
-            delivery_adress=adress,
+            pk=order_pk,
+            defaults={
+            'cart':cart,
+            'contact_phone':phone,
+            'delivery_adress':adress,
+            }
 
        )
 
@@ -42,4 +53,7 @@ class Order(SuccessMessageMixin, UpdateView):
         return obj
 
     def get_success_url(self):
-       return reverse_lazy('main')
+        self.object.status=('2','Подтвержден')
+        self.object.save()
+        del(self.request.session['cart_pk'])
+        return reverse_lazy('main')

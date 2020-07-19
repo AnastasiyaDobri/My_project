@@ -6,6 +6,7 @@ from books.models import Books
 from genre.models import Genre
 from authors.models import Authors
 from .forms import CreateBookForm
+#from comments.views import add_comment
 from django.views.generic import TemplateView
 from django.views.generic.edit import CreateView
 from django.views.generic.edit import UpdateView
@@ -66,6 +67,11 @@ class ListGenreBook(ListView):
 class DetailBook(DetailView):
     model=Books
     template_name='books/detail-book.html'
+    def get_object(self):
+        book = get_object_or_404(Books, pk=self.kwargs.get('pk'))
+        #comments=add_comment(self.request, book.pk)
+        return book
+    
 
 
 class ListBookbyGenre(ListView):

@@ -6,6 +6,7 @@
 <html lang="ru">
 
 {%block main%}
+{{object.book}}
 {%if perms.auth.create_books or perms.auth.change_books%}
   <form action="" method="post" enctype="multipart/form-data">
     {%csrf_token %}

@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'bootstrap_modal_forms',
     'crispy_forms',
     'phonenumber_field',
     'genre',
@@ -47,7 +48,7 @@ INSTALLED_APPS = [
     'series',
     'cart',
     'order',
-    'comments'
+    'comments',
 
 
 ]

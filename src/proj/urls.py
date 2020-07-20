@@ -37,6 +37,7 @@ urlpatterns = [
     path('login/', LoginProfile.as_view(), name='login'),
     path('logout/', LogoutProfile.as_view(), name='logout'),
     path('password_change/', PasswordChange.as_view(), name='password_change'),
+    path('comments/', include('comments.urls', namespace="comments")),
     #path('password_reset/', PasswordReset.as_view(), name='password_reset'),
     #path('password_reset_done/', PasswordResetDone.as_view(), name='password_reset_done'),
     #path('password_reset_confirm/(?P<uidb64>[0-9A-Za-z]+)-(?P<token>.+)/$', PasswordResetConfirm.as_view(), name='password_reset_confirm'),

@@ -46,19 +46,10 @@
     </div>
   </div>
 </div>
-  </form>
+
   
 
-<a class="btn btn-default" href="{% url 'books:add_comment' object.pk %}"><i class="fas fa-comment fa-2x" style="color:yellow" ></i></a>
-{% for comments in object.comments.all %}
-    <li class="list-group-item list-group-item-secondary">
-        <div class="date">{{ comments.created }}</div>
-        <strong>{{ comments.user }}</strong>
-        <p>{{ comments.body|linebreaks }}</p>
-    </li>
-{% empty %}
-    <li class="list-group-item list-group-item-secondary">Комментариев пока не было <i class="far fa-smile"  ></i></li>
-{% endfor %}
+{%include "comments.html"%}
 
 
 

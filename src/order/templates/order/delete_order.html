@@ -1,0 +1,18 @@
+{% extends "base.html"%}
+{% load static%}
+{%block title%} Удаление заказа {% endblock title%}
+
+
+{%block main%}
+
+  <h2>Удалить {{object.name}}</h2>
+  <form action="" method="post">
+    {%csrf_token %}
+    {{context}}
+    <br>
+    <input type="submit" class="btn btn-outline-danger" value="Подтвердить удаление">
+  </form>
+
+
+
+ {%endblock main%}

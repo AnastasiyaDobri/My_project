@@ -43,9 +43,7 @@ class ListGenre(LoginRequiredMixin, ListView):
     model=Genre
     context_object_name = 'obj'
     template_name='genre/list-genre.html'
-    #def get_context_data(self, **kwargs):
-        #user=self.request.user
-        #print(user.has_perm('auth.create_genre'))
+
 
 class DeleteGenre(DeleteView):
     model=Genre

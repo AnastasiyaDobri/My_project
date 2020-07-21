@@ -10,6 +10,9 @@ from django.urls import reverse_lazy
 from cart.views import get_cart
 from cart.models import BooksInCart
 from django.contrib.messages.views import SuccessMessageMixin
+from django.views.generic import ListView
+from django.views.generic import DeleteView
+from django.shortcuts import get_object_or_404
 
 class Order(SuccessMessageMixin, UpdateView):
     model=models.Order
@@ -45,6 +48,8 @@ class Order(SuccessMessageMixin, UpdateView):
             'cart':cart,
             'contact_phone':phone,
             'delivery_adress':adress,
+            'status':'Новый',
+
             }
 
        )
@@ -57,3 +62,17 @@ class Order(SuccessMessageMixin, UpdateView):
         self.object.save()
         del(self.request.session['cart_pk'])
         return reverse_lazy('main')
+
+
+class DetailOrder(ListView):
+    model=models.Order
+    template_name='order/order_view.html'
+    context_object_name = 'object'
+
+   
+class DeleteOrder(DeleteView):
+    model=models.Order
+    form_class=OrderForm
+    template_name='delete_order.html'
+    def get_success_url(self):
+       return reverse_lazy('books:list')

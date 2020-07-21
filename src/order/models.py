@@ -14,8 +14,8 @@ class Order(models.Model):
         ('5','Доставлен'),
         ('6','Отменен'),],
         max_length=1,
-        default=('1','Новый'),
         blank=False,
+        default='Новый',
     )
 
     delivery_adress=models.CharField("Адрес доставки", max_length=120)

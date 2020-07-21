@@ -11,6 +11,7 @@
           <ul class="list-unstyled">
             {%if user.is_authenticated %}<li><a href="{% url 'password_change' %}" class="text-warning">Сменить пароль</a></li> {%endif%}
             {%if user.is_authenticated %}<li><a href="{% url 'profiles:update' %}?profiles_pk={{user.profiles.pk}}" class="text-warning">Изменить данные пользователя</a></li> {%endif%}
+            {%if user.is_authenticated %}<li><a href="{% url 'order:list' %}" class="text-warning">Заказы</a></li> {%endif%}
             <li><a href="{% url 'books:list' %}" class="text-white">Список всех книг</a></li>
             <li><a href="{% url 'genre:list' %}" class="text-white">Список жанров</a></li>
             <li><a href="{% url 'authors:list' %}" class="text-white">Список авторов</a></li>

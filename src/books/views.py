@@ -93,11 +93,11 @@ class DetailBook(FormMixin, DetailView):
             return self.form_valid(form)
         else:
             return self.form_invalid(form)
-
+            
     def form_valid(self, form):
         user=self.request.user
         form_body=form.cleaned_data['body']
-        create=CommentsBook.objects.create(
+        create=CommentsBook.objects.get_or_create(
             user=str(user),
             book=get_object_or_404(Books, pk=self.kwargs.get('pk')),
             body=form_body,        

@@ -13,8 +13,14 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.views.generic import ListView
 from django.views.generic import DeleteView
 from django.shortcuts import get_object_or_404
+from django.views.generic.edit import FormMixin
+from comments.forms import CommentForm
+from comments.models import CommentsOrder
+from django.http import HttpResponseRedirect
 
-class Order(SuccessMessageMixin, UpdateView):
+
+
+class Order(SuccessMessageMixin, UpdateView, FormMixin):
     model=models.Order
     template_name='order/order.html'
     form_class=OrderForm
@@ -48,8 +54,6 @@ class Order(SuccessMessageMixin, UpdateView):
             'cart':cart,
             'contact_phone':phone,
             'delivery_adress':adress,
-            'status':'Новый',
-
             }
 
        )
@@ -58,10 +62,10 @@ class Order(SuccessMessageMixin, UpdateView):
         return obj
 
     def get_success_url(self):
-        self.object.status=('2','Подтвержден')
         self.object.save()
         del(self.request.session['cart_pk'])
         return reverse_lazy('main')
+
 
 
 class DetailOrder(ListView):
@@ -73,6 +77,6 @@ class DetailOrder(ListView):
 class DeleteOrder(DeleteView):
     model=models.Order
     form_class=OrderForm
-    template_name='delete_order.html'
+    template_name='order/delete_order.html'
     def get_success_url(self):
        return reverse_lazy('books:list')

@@ -5,6 +5,7 @@
 
 {%block main%}
 <main role="main">
+{%if perms.order.add_order%}
 <h3>Книги в заказе:</h3>
 {% for books in object.cart.books.all %}
 <h6><li class="list-group-item list-group-item-action list-group-item-warning">{{books.book.name}} <span class="badge badge-secondary">{{books.quantity}} шт. {{books.price}} BYN.</span></li></h6>
@@ -18,6 +19,11 @@
  <br>
 <h5>К оплате {{object.cart.price}} BYN</h5>
 <input type="submit" class="btn btn-outline-warning" value="Подтвердить">
-
+{%else%}
+<br>
+<h3>Для выполнения действия недостаточно полномочий</h3>
+{%endif%}
 </main>
+
+
 {% endblock main%}

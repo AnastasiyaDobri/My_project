@@ -1,5 +1,8 @@
 {% extends "base.html"%}
+{% load crispy_forms_tags %}
 {% load static%}
+{% load my_tags %}
+
 {%block title%} Стартовая страница {% endblock title%}
 
 
@@ -13,6 +16,7 @@
 
     <h5 class="display-4 font-weight-normal">Книги</h5>
     <h4 class="ldisplay-5">top-6 книг с высокими оценками</h4>
+
   </div>
     <div class="container">
       <div class="row"> 
@@ -70,6 +74,7 @@
                 {%endif%}
                 </div>
                 <a href="{% url 'cart:add' %}?book_pk={{object.pk}}"><i class="fas fa-shopping-cart "></i></a>
+
               </div>
             </div>
           </div>

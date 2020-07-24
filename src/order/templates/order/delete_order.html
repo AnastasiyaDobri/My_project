@@ -4,15 +4,19 @@
 
 
 {%block main%}
-
-  <h2>Удалить {{object.name}}</h2>
+{%if perms.order.delete_order%}
+  <h2>Отменить заказ {{object.pk}}?</h2>
+  <li class="list-group-item list-group-item-secondary">{% for books in object.cart.books.all %}<h6>{{books.book.name}}</h6>{%endfor%}</li>
   <form action="" method="post">
     {%csrf_token %}
     {{context}}
     <br>
-    <input type="submit" class="btn btn-outline-danger" value="Подтвердить удаление">
+    <input type="submit" class="btn btn-outline-danger" value="Подтвердить отмену">
   </form>
-
+{%else%}
+<br>
+<h3>Для выполнения действия недостаточно полномочий</h3>
+{%endif%}
 
 
  {%endblock main%}

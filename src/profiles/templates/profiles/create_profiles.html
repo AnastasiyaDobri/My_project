@@ -6,7 +6,43 @@
 <html lang="ru">
 
 {%block main%}
-{%if user.is_authenticated %}<h5><div class="alert alert-warning" role="alert"><a href="{% url 'password_change' %}" class="text-warning">Сменить пароль</a></div></h5> {%endif%}
+{%if perms.profiles.add_profiles or perms.profiles.change_profiles%}
+{%if user.is_authenticated %}
+<div class="alert alert-warning" role="alert">
+ <div class="container">
+  <div class="row">
+    <div class="col-sm">
+    <h5>
+    <a href="{% url 'password_change' %}" class="text-warning">Сменить пароль</a>
+   </h5> 
+    </div>
+    <div class="col-sm">
+    <h5>
+    <a href="{% url 'order:list' %}" class="text-warning">История заказов</a>
+    </h5> 
+    </div>
+  </div>
+ </div>
+</div>
+
+<ul class="list-group">
+Пользователь: 
+  <li class="list-group-item ">{{profiles.user}}</li>
+  <br>
+email:
+  <li class="list-group-item"> {{profiles.user.email}}</li>
+  <br>
+Роль: 
+  <li class="list-group-item">{%for groups in profiles.user.groups.all%}
+{{groups}}
+{{groups.permissions.all}}
+
+{%endfor%}</li>
+</ul>
+
+ {%endif%}
+<hr>
+  
   <form action="" method="post" enctype="multipart/form-data">
     {%csrf_token %}
     {{form|crispy}}
@@ -14,5 +50,5 @@
 
 
   </form>
-
+{%endif%}
 {%endblock main%}

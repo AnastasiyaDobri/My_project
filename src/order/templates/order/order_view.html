@@ -2,10 +2,11 @@
 {% load static%}
 {% load crispy_forms_tags %}
 {%block title%} Мои заказы {% endblock title%}
+<!DOCTYPE html>
+<html lang="ru">
 
 {%block main%}
-<main role="main">
-
+{%if perms.order.view_order%}
 <table class="table">
   <thead>
     <tr>
@@ -16,51 +17,27 @@
     </tr>
   </thead>
   <tbody>
+
 {% for object in object_list %}
 {%if user == object.cart.user %}
     <tr>
       <th scope="row">{{object.pk}}</th>
       <td>{% for books in object.cart.books.all %}<h6>{{books.book.name}}</h6>{%endfor%}</td>
       <td>{{object.cart.price}} BYN</td>
-      <td>{%if object.get_status_display != "('2', 'Подтвержден')" %}<span class="badge badge-dark">{{ object.get_status_display}}</span>{%if object.get_status_display == 'Новый' %}
-        <button type="button" class="close" data-toggle="modal" data-target="#exampleModal">
-        <span aria-hidden="true">&times;</span>
-        </button>{%endif%}
-      {%endif%}</td>
+      <td>{%if object.get_status_display == "Новый" %}<button type="button" class="close"><a href="{% url 'order:delete' object.pk %}">
+        <span aria-hidden="true">&times;</span></a>{%endif%}
+        </button><span class="badge badge-dark">{{ object.get_status_display}}</span>
 
+ </td>
     </tr>
-
-
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">заказ №{{object.pk}}</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-
- <form action="{% url 'order:delete' object.pk %}" method="post">
-    {%csrf_token %}
-    {{context}}
-    <br>
-    <input type="submit" class="btn btn-danger" value="Отменить заказ">
-  </form>
-  </div>
-      <div class="modal-footer">
-   
-      </form>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-</main>
-
+ {%endif%}
+ {%endfor%}
+   </tbody>
+{%else%}
+<br>
+<h3>Для выполнения действия недостаточно полномочий</h3>
 {%endif%}
-{%endfor%}
 {% endblock main%}
+
+
 

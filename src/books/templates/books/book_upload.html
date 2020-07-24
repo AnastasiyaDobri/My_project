@@ -1,0 +1,18 @@
+{% extends "base.html"%}
+{% load static%}
+{% load crispy_forms_tags %}
+{%block title%} Upload a file{% endblock title%}
+
+{%block main%}
+{%if perms.auth.create_books or perms.auth.change_books%}
+    <form action="" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label for="file1"> Загрузите файл:</label>
+        <br>
+        <input type="file" class="form-control-file" name="file">
+        <hr>
+        <button type="submit" class="btn btn-outline-dark">Загрузить</button>
+    </form>
+{%endif%}
+
+ {%endblock main%}

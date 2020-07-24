@@ -6,6 +6,7 @@ from django.views.generic.edit import CreateView
 from django.template import Context
 from profiles.models import Profiles
 from books.models import Books
+from order.models import Order
 from cart.models import BooksInCart
 from profiles.models import User
 from .forms import CreateProfileForm
@@ -30,11 +31,20 @@ class MyGroups(Group):
     manager, created = Group.objects.get_or_create(name='Manager')
     content_type_books= ContentType.objects.get_for_model(Books)
     content_type_cart= ContentType.objects.get_for_model(BooksInCart) 
+    content_type_order= ContentType.objects.get_for_model(Order)
     customer.permissions.add(Permission.objects.get(codename='can_view_books',name='Can view books',content_type=content_type_books))
     customer.permissions.add(Permission.objects.get(codename='can_add_books_in_cart',name='Can add books in cart',content_type=content_type_cart))
     customer.permissions.add(Permission.objects.get(codename='can_change_books_in_cart',name='Can change books in cart',content_type=content_type_cart))
     customer.permissions.add(Permission.objects.get(codename='can_delete_books_in_cart',name='Can delete books in cart',content_type=content_type_cart))
     customer.permissions.add(Permission.objects.get(codename='can_view_books_in_cart',name='Can view books in cart',content_type=content_type_cart))
+    customer.permissions.add(Permission.objects.get(name='Can view order'))
+    customer.permissions.add(Permission.objects.get(name='Can add order'))
+    customer.permissions.add(Permission.objects.get(name='Can delete order'))
+    customer.permissions.add(Permission.objects.get(name='Can delete comments book'))
+    customer.permissions.add(Permission.objects.get(name='Can add comments book'))
+    customer.permissions.add(Permission.objects.get(name='Can add profiles'))
+    customer.permissions.add(Permission.objects.get(name='Can change profiles'))
+
 
 
 class CreateUserProfile(FormView):
@@ -95,17 +105,6 @@ class UpdateProfile(UpdateView):
 
     def get_success_url(self):
        return reverse_lazy('main')
-
-
-
-
-
-
-
-
-
-
-
 
 
 

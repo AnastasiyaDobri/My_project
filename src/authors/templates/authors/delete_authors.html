@@ -1,11 +1,11 @@
 {% extends "base.html"%}
 {% load static%}
-{%block title%} Удаление книги {% endblock title%}
+{%block title%} Удаление автора {% endblock title%}
 
 
 {%block main%}
 {%if perms.auth.delete_books %}
-  <h2>Удалить книгу "{{object.name}}"?</h2>
+  <h2>Удалить автора "{{object.name}}"?</h2>
   <form action="" method="post">
     {%csrf_token %}
     {{context}}
